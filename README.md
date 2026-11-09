@@ -67,11 +67,13 @@ le nombre d'alertes, la courbe de prix, et le rendement de chaque bougie 1 minut
 
 **ETHUSDT** : 16 alertes affichées, prix en hausse puis stabilisation.
 
-![Dashboard ETHUSDT](docs/dashboard_eth.png)
+![Dashboard ETHUSDT](<img width="1620" height="976" alt="Capture d&#39;écran 2026-11-09 231257" src="https://github.com/user-attachments/assets/92806bd0-55c8-4bfa-a000-4ccb7899244d" />
+)
 
 **BTCUSDT** : aucune alerte, le rendement reste sous le seuil (0,25 %).
 
-![Dashboard BTCUSDT](docs/dashboard_btc.png)
+![Dashboard BTCUSDT](<img width="1621" height="977" alt="Capture d&#39;écran 2026-11-09 231317" src="https://github.com/user-attachments/assets/3843d6bb-1f56-4bd9-85a5-a8465557bed6" />
+)
 
 ## 5. Arborescence
 
