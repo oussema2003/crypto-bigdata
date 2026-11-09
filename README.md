@@ -41,16 +41,16 @@ de `|rendement|` sur tout l'historique (paramètre `QUANTILE_SEUIL` dans `config
 
 Le fichier `seuils.json` fait le lien entre les deux mondes : le batch le produit, le streaming le lit.
 
-## 3. Technologies et justification
+## 3. Technologies 
 
-| Technologie | Rôle | Pourquoi |
-|---|---|---|
-| **HDFS** | stockage de l'historique | volume important (12 paires x 36 mois x ~43 000 bougies/mois), distribué et répliqué |
-| **Spark SQL** (batch) | rendement, volatilité, quantile 99 % | calcul parallèle sur tout l'historique, `percentile_approx` natif |
-| **Kafka** | bus de messages | découple la source (WebSocket) du traitement, tamponne les rafales, rejouable |
-| **Spark Structured Streaming** | traitement en continu | même moteur et mêmes fonctions que le batch, fenêtres et état gérés, tolérant aux pannes (checkpoint) |
-| **HBase** | stockage temps réel | écritures rapides, lecture des dernières valeurs par paire grâce à la clé de ligne `PAIRE#(9999999999999-ts)` (les plus récentes en premier) |
-| **Streamlit + Altair** | interface | tableau de bord en Python, rafraîchi automatiquement |
+| Technologie | Rôle |
+|---|---|
+| **HDFS** | stockage de l'historique |
+| **Spark SQL** (batch) |
+| **Kafka** | bus de messages |
+| **Spark Structured Streaming** |
+| **HBase** | stockage temps réel | 
+| **Streamlit + Altair** | interface |
 
 Tables HBase (famille `d`) :
 
