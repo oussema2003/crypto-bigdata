@@ -1,0 +1,5 @@
+kafka-python
+websocket-client
+happybase
+streamlit
+pandas
