@@ -26,7 +26,7 @@ de `|rendement|` sur tout l'historique (paramètre `QUANTILE_SEUIL` dans `config
             BATCH (historique)                              TEMPS RÉEL
   Binance data.binance.vision (CSV 1 min)          Binance WebSocket (kline_1m)
               |                                               |
-        telecharger_historique.sh                        producer.py
+              |                                         producer.py
               |                                               |
         HDFS /crypto/history                           Kafka (topic klines)
               |                                               |
@@ -79,12 +79,7 @@ le nombre d'alertes, la courbe de prix, et le rendement de chaque bougie 1 minut
 crypto-bigdata/
 ├── README.md
 ├── requirements.txt            dépendances Python (poste hôte)
-├── config.py                   paires, mois, adresses Kafka / HBase
-├── docs/                       captures d'écran du dashboard
-├── scripts/
-│   ├── telecharger_historique.sh   télécharge les CSV Binance
-│   ├── charger_hdfs.sh             copie les CSV sur HDFS
-│   └── creer_tables_hbase.sh       crée les tables prix, alertes, volatilite
+├── config.py                   paires, mois, adresses Kafka / HBase       
 ├── batch/
 │   └── batch_seuils.py         Spark : volatilité + seuils -> seuils.json
 ├── streaming/
@@ -101,8 +96,6 @@ crypto-bigdata/
 
 | Programme | Où |
 |---|---|
-| telecharger_historique.sh | conteneur (ou poste hôte) : il faut Internet, curl et unzip |
-| charger_hdfs.sh, creer_tables_hbase.sh | conteneur `hadoop-master` |
 | batch_seuils.py, stream_job.py | conteneur `hadoop-master` (spark-submit) |
 | producer.py, dashboard.py | poste hôte (Python 3.8 ou plus) |
 
@@ -168,8 +161,3 @@ streamlit run app/dashboard.py
 ```
 
 Vérification : `echo "count 'prix'" | hbase shell` doit afficher un nombre qui augmente.
-
-## 8. Limites et pistes
-
-- Seuil statique (quantile 99 % de l'historique) : il ne s'adapte pas aux changements de régime du marché.
-- Une extension d'apprentissage automatique (prédire un mouvement brusque dans les 5 minutes) a été étudiée : GBT avec AUC-PR 0,42 contre 0,04 pour le hasard sur le jeu de test. Elle n'est pas incluse dans cette version.
