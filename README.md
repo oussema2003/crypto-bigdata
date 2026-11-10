@@ -123,19 +123,16 @@ listeners=PLAINTEXT://0.0.0.0:9092
 advertised.listeners=PLAINTEXT://127.0.0.1:9092
 ```
 
-Créer le topic et les tables :
+Créer le topic :
 
 ```bash
 /usr/local/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181/kafka --replication-factor 1 --partitions 1 --topic klines
-cd /root/crypto-bigdata && bash scripts/creer_tables_hbase.sh
 ```
 
 ### 7.2 Batch : historique et seuils (conteneur)
 
 ```bash
 cd /root/crypto-bigdata
-bash scripts/telecharger_historique.sh
-bash scripts/charger_hdfs.sh
 nohup spark-submit batch/batch_seuils.py > batch.log 2>&1 &
 ```
 
